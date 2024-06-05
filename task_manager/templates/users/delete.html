@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% load django_bootstrap5 %}
+{% load i18n %}
+{% block title %}
+  {% trans 'Task Manager' %}
+{% endblock %}
+
+{% block content %}
+<div class="container wrapper flex-grow-1">
+      <h1 class="my-4">
+          {% trans 'Delete user' %}
+      </h1>
+<p>{% trans 'Are you sure you want to delete' %} 1 2?</p>
+<form method="post">
+  <input type="hidden" name="csrfmiddlewaretoken" value="jV7aXSrf3DHnKC6E3tLxkJxUauKozuNVKj2XhW44pGIB4GHIZbL5PyI5vTaC56Ri">
+  <input class="btn btn-danger" type="submit" value="Да, удалить">
+</form>
+    </div>
+{% endblock %}

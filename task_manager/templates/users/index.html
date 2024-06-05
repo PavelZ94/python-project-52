@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% load django_bootstrap5 %}
+{% load i18n %}
+{% block title %}
+  {% trans 'Task Manager' %}
+{% endblock %}
+
+{% block content %}
+<div class="container wrapper flex-grow-1">
+      <h1 class="my-4">
+          {% trans 'Users' %}
+      </h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>{% trans 'Username' %}</th>
+      <th>{% trans 'Fullname' %}</th>
+      <th>{% trans 'Created at' %}</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+
+  </tbody>
+</table>
+
+</div>
+{% endblock %}
