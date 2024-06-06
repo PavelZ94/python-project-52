@@ -14,4 +14,4 @@ class Login(LoginView):
 
 
 class Logout(LogoutView):
-    next_page = 'index.html'
+    next_page = reverse_lazy('homepage')
