@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 
-{% load django_bootstrap5 %}
+{% load bootstrap5 %}
 {% load i18n %}
+{% load crispy_forms_tags %}
+
 {% block title %}
   {% trans 'Task Manager' %}
 {% endblock %}
@@ -13,11 +15,9 @@
       </h1>
 <form action="{% url 'user_create' %}" method="post">
     {% csrf_token %}
-     <div class="form-group">
-         {{ form.as_p }}
-     </div>
+    {{ form.as_p }}
     <div class="form-group">
-        <input type="submit" value="{% trans 'Register %}">
+        <input type="submit" value="{% trans 'Register' %}">
     </div>
 </form>
 </div>

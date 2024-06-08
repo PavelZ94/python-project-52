@@ -1,23 +1,24 @@
 {% extends 'base.html' %}
 
-{% load django_bootstrap5 %}
+{% load bootstrap5 %}
 {% load i18n %}
 
+{% block title %}
+  {% trans 'Task Manager' %}
+{% endblock %}
+
 {% block content %}
-    <div class="container wrapper flex-grow-1">
+<div class="container wrapper flex-grow-1">
       <h1 class="my-4">
           {% trans 'Login' %}
       </h1>
-<form method="post" action="{% url 'login' %}">
+<form method="post">
     {% csrf_token %}
-  <input type="hidden">
-    <div class="form-group">
-    {{ form|crispy }}
-    </div>
+    {{ form|as_p }}
+
     <div class="form-group">
         <input class="btn btn-primary" type="submit" value="{% trans 'Login' %}">
     </div>
 </form>
-
-    </div>
+</div>
 {% endblock %}
