@@ -9,6 +9,7 @@ from .forms import CreationForm
 
 
 class IndexView(ListView):
+    model = User
     template_name = 'users/index.html'
 
 

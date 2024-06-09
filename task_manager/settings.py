@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
     'task_manager',
     'task_manager.users',
     'bootstrap5',
@@ -89,9 +90,9 @@ WSGI_APPLICATION = 'task_manager.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
+        default='sqlite:///db.sqlite3',
         conn_max_age=600,
-        conn_health_checks=True,
-    ),
+    )
 }
 
 #DATABASES = {

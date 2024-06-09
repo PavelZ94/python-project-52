@@ -2,22 +2,21 @@
 
 {% load bootstrap5 %}
 {% load i18n %}
-{% load crispy_forms_tags %}
 
 {% block title %}
-  {% trans 'Task Manager' %}
+  {% trans "Task Manager" %}
 {% endblock %}
 
 {% block content %}
 <div class="container wrapper flex-grow-1">
       <h1 class="my-4">
-          {% trans 'Registration' %}
+          {% trans "Registration" %}
       </h1>
 <form action="{% url 'user_create' %}" method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <div class="form-group">
-        <input type="submit" value="{% trans 'Register' %}">
+        <input type="submit" value='{% trans "Register" %}'>
     </div>
 </form>
 </div>

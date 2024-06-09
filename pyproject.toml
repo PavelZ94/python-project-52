@@ -13,7 +13,7 @@ dj-database-url = "^2.2.0"
 django = "^5.0.6"
 gunicorn = "^22.0.0"
 psycopg2-binary = "^2.9.9"
-django-bootstrap5 = "^24.2"
+django-b18nootstrap5 = "^24.2"
 django-crispy-forms = "^2.1"
 
 
