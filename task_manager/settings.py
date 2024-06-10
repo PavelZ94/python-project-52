@@ -35,6 +35,7 @@ ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
     '0.0.0.0',
+    '.onrender.com',
 ]
 
 
@@ -51,7 +52,6 @@ INSTALLED_APPS = [
     'task_manager',
     'task_manager.users',
     'bootstrap5',
-    'crispy_forms'
 ]
 
 MIDDLEWARE = [
@@ -104,6 +104,11 @@ DATABASES = {
 
 AUTH_USER_MODEL = "users.User"
 
+LOGIN_URL = 'login'
+LOGOUT_URL = 'homepage'
+LOGIN_REDIRECT_URL = 'homepage'
+LOGOUT_REDIRECT_URL = 'homepage'
+
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
@@ -126,7 +131,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru'
 
 TIME_ZONE = 'UTC'
 

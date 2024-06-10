@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.contrib.auth.models import User
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
@@ -27,6 +26,7 @@ class Update(SuccessMessageMixin, UpdateView):
     template_name = 'users/update.html'
     success_url = reverse_lazy('users')
     success_message = 'User settings was updated'
+
 
 class Delete(SuccessMessageMixin, DeleteView):
     model = User
