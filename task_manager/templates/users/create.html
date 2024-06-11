@@ -14,10 +14,8 @@
       </h1>
 <form action="{% url 'user_create' %}" method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <div class="form-group">
-        <input type="submit" value='{% trans "Register" %}'>
-    </div>
+    {% bootstrap_form form %}
+        <input class="btn btn-primary" type="submit" value='{% trans "Register" %}'>
 </form>
 </div>
 

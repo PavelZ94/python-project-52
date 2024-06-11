@@ -14,11 +14,8 @@
       </h1>
 <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-
-    <div class="form-group">
+    {% bootstrap_form form %}
         <input class="btn btn-primary" type="submit" value='{% trans "Login" %}'>
-    </div>
 </form>
 </div>
 {% endblock %}
