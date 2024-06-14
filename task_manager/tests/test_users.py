@@ -61,14 +61,14 @@ class CRUDTest(TestCase):
         changed_first_name = 'Pavel'
         response = self.client.post(
             reverse('user_update', kwargs={'pk': user.pk}),
-            data={#'username': username,
+            data={'username': username,
                   'first_name': changed_first_name,
                   'last_name': last_name,
                   'password1': password,
                   'password2': password}
         )
 
-        self.assertRedirects(response, reverse('users', 302))
+        self.assertRedirects(response, reverse('users'), 302)
 
         user.refresh_from_db()
         self.assertEqual(user.first_name, changed_first_name)
