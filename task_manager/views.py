@@ -1,5 +1,4 @@
 from django.views.generic import TemplateView
-from django.shortcuts import render
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.messages.views import SuccessMessageMixin
@@ -25,6 +24,6 @@ class UserLogin(SuccessMessageMixin, LoginView):
 class Logout(SuccessMessageMixin, LogoutView):
     next_page = reverse_lazy('homepage')
 
-    def get(self, request, *args, **kwargs):
+    def dispatch(self, request, *args, **kwargs):
         messages.success(request, _('You are logged out'))
-        return super().get(request, *args, **kwargs)
+        return super().dispatch(request, *args, **kwargs)

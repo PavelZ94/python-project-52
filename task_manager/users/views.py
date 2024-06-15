@@ -6,6 +6,7 @@ from django.urls import reverse_lazy
 # Create your views here.
 from .models import User
 from .forms import CreationForm
+from task_manager.mixin import RulesMixin
 from django.contrib import messages
 from django.shortcuts import redirect
 
@@ -25,28 +26,6 @@ class SignUp(SuccessMessageMixin, CreateView):
     template_name = 'users/create.html'
     success_url = reverse_lazy('login')
     success_message = _('User is registered successfully')
-
-
-class RulesMixin:
-
-    def has_permission(self) -> bool:
-        return self.get_object().pk == self.request.user.pk
-
-    def dispatch(self, request, *args, **kwargs):
-        if not request.user.is_authenticated:
-            messages.error(
-                request,
-                messages.error(self.request, _('You are not authorized!'))
-            )
-            return redirect('login')
-
-        elif not self.has_permission():
-            messages.error(
-                request,
-                messages.error(self.request, _("You haven't permission!"))
-            )
-            return redirect('users')
-        return super().dispatch(request, *args, **kwargs)
 
 
 class Update(RulesMixin, SuccessMessageMixin, UpdateView):

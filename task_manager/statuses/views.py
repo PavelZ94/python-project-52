@@ -1,6 +1,12 @@
-from django.shortcuts import render
-from django.views.generic import ListView
+from django.views.generic import CreateView, ListView, UpdateView, DeleteView
+from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
+from django.utils.translation import gettext_lazy as _
+from .models import Status
+from .forms import StatusForm
 # Create your views here.
+
 
 class IndexView(ListView):
     model = Status
@@ -9,3 +15,29 @@ class IndexView(ListView):
 
     def get_queryset(self):
         return Status.objects.all()
+
+
+class CreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+    model = Status
+    form_class = StatusForm
+    template_name = 'statuses/create.html'
+    success_url = reverse_lazy('statuses')
+    success_message = _('Status was created successfully')
+    login_url = reverse_lazy('login')
+
+
+class UpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = Status
+    form_class = StatusForm
+    template_name = 'statuses/update.html'
+    success_url = reverse_lazy('statuses')
+    success_message = _('Status was updated successfully')
+    login_url = reverse_lazy('login')
+
+
+class DeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
+    model = Status
+    template_name = 'statuses/delete.html'
+    success_url = reverse_lazy('statuses')
+    success_message = _('Status was deleted successfully')
+    login_url = reverse_lazy('login')

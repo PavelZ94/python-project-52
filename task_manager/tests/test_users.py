@@ -10,10 +10,10 @@ class CRUDTest(TestCase):
         self.client = Client()
 
     def test_user_create(self):
-        username = 'Test'
-        first_name = 'testname'
-        last_name = 'surname'
-        password = 'test1234Q'
+        username = 'Slipknot'
+        first_name = 'Joey'
+        last_name = 'Jordison'
+        password = 'SuperB@ll'
 
         response = self.client.post(
             reverse('user_create'),
@@ -32,28 +32,35 @@ class CRUDTest(TestCase):
         self.assertEqual(new_user.first_name, first_name)
         self.assertEqual(new_user.last_name, last_name)
 
-    #def test_user_update(self):
 
-    #    user = User.objects.create(
-    #    username=' Sum41',
-    #    first_name='Deryck',
-    #    last_name='Whibley',
-    #    password='R0ckStar')
+    def test_user_read(self):
+        username = 'Slipknot'
+        first_name = 'Joey'
+        last_name = 'Jordison'
+        password = 'SuperB@ll'
 
-    #    data = {'first_name': 'Pavel',
-    #            'last_name': 'Whibley'}
+        response = self.client.post(
+            reverse('user_create'),
+            data={'username': username,
+                  'first_name': first_name,
+                  'last_name': last_name,
+                  'password1': password,
+                  'password2': password}
+        )
 
+        self.assertRedirects(response, reverse('login'), 302)
 
-    #    response = self.client.post(reverse('user_update', kwargs={'pk': user.pk}), data)
+        new_user = User.objects.get(username=username)
+        all_users = User.objects.all()
 
-    #    self.assertEqual(response.status_code, 200)
+        self.assertIn(new_user, all_users)
 
     def test_user_update(self):
 
         username = 'Sum41'
         first_name = 'Deryck'
         last_name = 'Whibley'
-        password = 'R0ckStar'
+        password = 'W@lkingDiZZaster'
 
         self.client.post(
             reverse('user_create'),
@@ -82,7 +89,6 @@ class CRUDTest(TestCase):
                   'password2': password}
         )
 
-        #self.assertEqual(response, reverse('users'))
         self.assertRedirects(response, reverse('users'))
 
         user.refresh_from_db()
