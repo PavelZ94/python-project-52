@@ -6,6 +6,8 @@ from django.urls import reverse_lazy
 # Create your views here.
 from .models import User
 from .forms import CreationForm
+from django.contrib import messages
+from django.shortcuts import redirect
 
 
 class IndexView(ListView):
@@ -25,7 +27,29 @@ class SignUp(SuccessMessageMixin, CreateView):
     success_message = _('User is registered successfully')
 
 
-class Update(SuccessMessageMixin, UpdateView):
+class RulesMixin:
+
+    def has_permission(self) -> bool:
+        return self.get_object().pk == self.request.user.pk
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            messages.error(
+                request,
+                messages.error(self.request, _('You are not authorized!'))
+            )
+            return redirect('login')
+
+        elif not self.has_permission():
+            messages.error(
+                request,
+                messages.error(self.request, _("You haven't permission!"))
+            )
+            return redirect('users')
+        return super().dispatch(request, *args, **kwargs)
+
+
+class Update(RulesMixin, SuccessMessageMixin, UpdateView):
     model = User
     form_class = CreationForm
     template_name = 'users/update.html'
@@ -33,7 +57,7 @@ class Update(SuccessMessageMixin, UpdateView):
     success_message = _('User settings was updated')
 
 
-class Delete(SuccessMessageMixin, DeleteView):
+class Delete(RulesMixin, SuccessMessageMixin, DeleteView):
     model = User
     template_name = 'users/delete.html'
     success_url = reverse_lazy('users')
