@@ -21,9 +21,13 @@ class UserLogin(SuccessMessageMixin, LoginView):
         return super().form_valid(form)
 
 
-class Logout(SuccessMessageMixin, LogoutView):
-    next_page = reverse_lazy('homepage')
+class Logout(LogoutView):
+    #next_page = reverse_lazy('homepage')
 
+    #def get(self, request, *args, **kwargs):
+    #    messages.success(request, _('You are logged out'))
+    #    response = super().get(request, *args, **kwargs)
+    #    return response
     def dispatch(self, request, *args, **kwargs):
-        messages.success(request, _('You are logged out'))
+        messages.info(request, _('You are logged out'))
         return super().dispatch(request, *args, **kwargs)
