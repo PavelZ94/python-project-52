@@ -15,14 +15,6 @@
 
 <a class="btn btn-primary mb-3" href="{% url 'task_create' %}">{% trans 'Create Task' %}</a>
 
-<div class="card mb-3">
-  <div class="card-body bg-light">
-    <form class="form-inline center" method="get">
-        {% bootstrap_form filter.form %}
-        <button class="btn btn-primary" type="submit">{% trans 'Show' %}</button>
-    </form>
-  </div>
-</div>
 
 <table class="table table-striped">
   <thead>
@@ -42,7 +34,7 @@
       <tr>
         <td>{{ task.id }}</td>
         <td>
-          <a href="{% url 'tasks' task.pk %}">{{ task.name }}</a>
+          <a href="{% url 'task_show' task.pk %}">{{ task.name }}</a>
         </td>
         <td>{{ task.status }}</td>
         <td>{{ task.author }}</td>

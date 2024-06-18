@@ -6,11 +6,11 @@ from task_manager.statuses.models import Status
 
 class Task(models.Model):
 
-    author = models.ForeignKey(User, on_delete=models.PROTECT)
+    author = models.ForeignKey(User, null=True, related_name='author', on_delete=models.PROTECT)
 
     status = models.ForeignKey(Status, on_delete=models.PROTECT, null=True, blank=True)
 
-    executor = models.ForeignKey(User, on_delete=models.PROTECT)
+    executor = models.ForeignKey(User, null=True, related_name='executor', on_delete=models.PROTECT)
 
     created_at = models.DateTimeField(auto_now_add=True)
 
