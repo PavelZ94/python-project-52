@@ -34,6 +34,8 @@ class CRUDTest(TestCase):
         response = self.client.post(reverse('status_create'),
                                     data={'name': name})
 
+        self.assertRedirects(response, reverse('statuses'))
+
 
 
     def test_update_status(self):

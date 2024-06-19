@@ -17,50 +17,52 @@ class CRUDTest(TestCase):
 
         self.client.force_login(self.user)
 
-        self.client.post(reverse('status_create'),
+        status_created = self.client.post(reverse('status_create'),
                                     data={'name': status})
 
         response = self.client.post(reverse('task_create'),
                                     data={'name': name,
-                                          'status': status})
+                                          'status': status_created})
 
-        self.assertRedirects(response, reverse('tasks'))
+        self.assertRedirects(response, reverse('tasks'), 302)
 
         new_task = Task.objects.get(name=name)
         all_tasks = Task.objects.all()
 
         self.assertIn(new_task, all_tasks)
 
-    def test_read_status(self):
+    def test_read_task(self):
         name = 'To capture the world'
         status = 'In work'
 
         self.client.force_login(self.user)
 
-        self.client.post(reverse('status_create'),
+        status_created = self.client.post(reverse('status_create'),
                                     data={'name': status})
 
         response = self.client.post(reverse('task_create'),
                                     data={'name': name,
-                                          'status': status})
+                                          'status': status_created})
 
-        self.assertRedirects(response, reverse('tasks'))
-
-
+        self.assertRedirects(response, reverse('tasks'), 302)
 
 
-    def test_update_status(self):
+
+
+    def test_update_task(self):
         name = 'To capture the world'
         status = 'In work'
 
         self.client.force_login(self.user)
 
-        self.client.post(reverse('status_create'),
+        status_created = self.client.post(reverse('status_create'),
                                     data={'name': status})
 
-        self.client.post(reverse('task_create'),
+        response = self.client.post(reverse('task_create'),
                                     data={'name': name,
-                                          'status': status})
+                                          'status': status_created})
+
+        self.assertRedirects(response, reverse('tasks'), 302)
 
         task = Task.objects.get(name=name)
 
@@ -72,28 +74,29 @@ class CRUDTest(TestCase):
 
         self.assertRedirects(response, reverse('tasks'))
 
-        status.refresh_from_db()
+        task.refresh_from_db()
 
         self.assertEqual(task.name, changed_task)
 
-    def test_delete_status(self):
+    def test_delete_task(self):
         name = 'To capture the world'
         status = 'In work'
 
         self.client.force_login(self.user)
 
-        self.client.post(reverse('status_create'),
+        status_created = self.client.post(reverse('status_create'),
                                     data={'name': status})
 
-        self.client.post(reverse('task_create'),
+        response = self.client.post(reverse('task_create'),
                                     data={'name': name,
-                                          'status': status})
+                                          'status': status_created})
 
+        self.assertRedirects(response, reverse('tasks'), 302)
         task = Task.objects.get(name=name)
 
         response = self.client.post(reverse('task_delete', kwargs={'pk': task.pk}))
 
         self.assertRedirects(response, reverse('tasks'))
 
-        deleted_task = Task.objects.filter(id=task.pk)
-        self.assertNotIn(task.pk, deleted_task)
+        deleted_task = Task.objects.filter(id=task.pk).exists()
+        self.assertFalse(deleted_task)
