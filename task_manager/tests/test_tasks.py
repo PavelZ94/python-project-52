@@ -31,6 +31,40 @@ class CRUDTest(TestCase):
 
         self.assertIn(new_task, all_tasks)
 
+    def show_task_for_auth_user(self):
+        name = 'To show task'
+        status = 'Extra status'
+
+        username = 'Slipknot'
+        first_name = 'Joey'
+        last_name = 'Jordison'
+        password = 'SuperB@ll'
+
+        response = self.client.post(
+            reverse('user_create'),
+            data={'username': username,
+                  'first_name': first_name,
+                  'last_name': last_name,
+                  'password1': password,
+                  'password2': password}
+        )
+
+        self.assertRedirects(response, reverse('login'), 302)
+
+        status_created = self.client.post(reverse('status_create'),
+                                    data={'name': status})
+
+        response = self.client.post(reverse('task_create'),
+                                    data={'name': username,
+                                          'status': status_created})
+
+        self.assertRedirects(response, reverse('tasks'), 302)
+
+        new_task = Task.objects.get(name=name)
+        all_tasks = Task.objects.all()
+
+        self.assertIn(new_task, all_tasks)
+
     def test_read_task(self):
         name = 'To capture the world'
         status = 'In work'
@@ -45,9 +79,6 @@ class CRUDTest(TestCase):
                                           'status': status_created})
 
         self.assertRedirects(response, reverse('tasks'), 302)
-
-
-
 
     def test_update_task(self):
         name = 'To capture the world'
