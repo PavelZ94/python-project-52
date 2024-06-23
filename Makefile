@@ -40,3 +40,7 @@ trans-messages:
 compile-trans:
 	python manage.py compilemessages
 
+testcoverage:
+	poetry run coverage run manage.py test && \
+	poetry run coverage xml
+

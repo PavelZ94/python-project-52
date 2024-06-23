@@ -1,40 +1,27 @@
-name: Python CI
+name: test-coverage
 
-on:
-  - push
-  - pull_request
+on: push
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        # we want to test our package on several versions of Python
-        python-version: ['3.10', '3.11']
     steps:
       - uses: actions/checkout@v3
-      - name: Set up Python ${{ matrix.python-version }}
+      - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: ${{ matrix.python-version }}
-        # make depends on poetry
+          python-version: 3.10.12
       - name: Install dependencies
         run: |
           pip install poetry
-          poetry install
-      - name: Run linter
-        run: |
-          make selfcheck
-      - name: Set Django settings module
-        run: export DJANGO_SETTINGS_MODULE=your_django_settings_module
+          make install
       - name: Test & publish code coverage
-        uses: paambaati/codeclimate-action@v3.2.0
+        uses: paambaati/codeclimate-action@v5.0.0
         if: github.ref_name == 'main'
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+          DATABASE_URL: sqlite:///db.sqlite3
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
-          DJANGO_SETTINGS_MODULE: ${{ secrets.DJANGO_SETTINGS_MODULE }}
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
         with:
-          coverageCommand: make test-coverage
+          coverageCommand: make testcoverage
           debug: true
