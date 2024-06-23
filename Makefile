@@ -15,7 +15,7 @@ shell:
 	$ ./manage.py shell
 
 test:
-	python manage.py test task_manager
+	poetry run python3 manage.py test
 
 lint:
 	poetry run flake8 task_manager
@@ -39,8 +39,4 @@ trans-messages:
 
 compile-trans:
 	python manage.py compilemessages
-
-testcoverage:
-	poetry run coverage run manage.py test && \
-	poetry run coverage xml
 
