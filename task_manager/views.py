@@ -1,3 +1,4 @@
+from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.forms import AuthenticationForm
@@ -26,3 +27,7 @@ class Logout(LogoutView):
     def dispatch(self, request, *args, **kwargs):
         messages.info(request, _('You are logged out'))
         return super().dispatch(request, *args, **kwargs)
+
+
+def page_not_found_view(request, exception):
+    return render(request, '404.html', status=404)

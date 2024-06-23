@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+#from django.views.defaults import server_error, page_not_found
 from .views import (IndexView,
                     UserLogin,
                     Logout)
@@ -29,3 +30,7 @@ urlpatterns = [
     path('tasks/', include('task_manager.tasks.urls')),
     path('labels/', include('task_manager.labels.urls')),
 ]
+
+handler404 = "task_manager.views.page_not_found_view"
+#handler404 = curry(page_not_found, exception=Exception('Page not Found'), template_name='404.html')
+#handler500 = curry(server_error, exception=Exception('Server Error'), template_name='500.html')
