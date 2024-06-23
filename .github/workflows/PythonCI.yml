@@ -25,6 +25,8 @@ jobs:
       - name: Run linter
         run: |
           make selfcheck
+      - name: Set Django settings module
+        run: export DJANGO_SETTINGS_MODULE=your_django_settings_module
       - name: Test & publish code coverage
         uses: paambaati/codeclimate-action@v3.2.0
         if: github.ref_name == 'main'
