@@ -1,15 +1,16 @@
 from django.test import TestCase, Client
 from django.urls import reverse
 from django.contrib.auth import get_user_model
-
 from task_manager.statuses.models import Status
+
 
 class CRUDTest(TestCase):
     model = get_user_model()
 
     def setUp(self):
         self.client = Client()
-        self.user = self.model.objects.create_user(username='Test', password='password')
+        self.user = self.model.objects.create_user(username='Test',
+                                                   password='password')
 
     def test_create_status(self):
         name = 'In work'
@@ -36,21 +37,20 @@ class CRUDTest(TestCase):
 
         self.assertRedirects(response, reverse('statuses'))
 
-
-
     def test_update_status(self):
         name = 'In work'
 
         self.client.force_login(self.user)
 
         self.client.post(reverse('status_create'),
-                                    data={'name': name})
+                         data={'name': name})
 
         status = Status.objects.get(name=name)
 
         changed_status = 'Finished'
 
-        response = self.client.post(reverse('status_update', kwargs={'pk': status.pk}),
+        response = self.client.post(reverse('status_update',
+                                            kwargs={'pk': status.pk}),
                                     data={'name': changed_status})
 
         self.assertRedirects(response, reverse('statuses'))
@@ -65,11 +65,12 @@ class CRUDTest(TestCase):
         self.client.force_login(self.user)
 
         self.client.post(reverse('status_create'),
-                                    data={'name': name})
+                         data={'name': name})
 
         status = Status.objects.get(name=name)
 
-        response = self.client.post(reverse('status_delete', kwargs={'pk': status.pk}))
+        response = self.client.post(reverse('status_delete',
+                                            kwargs={'pk': status.pk}))
 
         self.assertRedirects(response, reverse('statuses'))
 

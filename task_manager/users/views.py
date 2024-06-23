@@ -1,14 +1,11 @@
-from django.shortcuts import render
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.utils.translation import gettext_lazy as _
 from django.urls import reverse_lazy
-# Create your views here.
 from .models import User
 from .forms import CreationForm
 from task_manager.mixin import RulesMixin
-from django.contrib import messages
-from django.shortcuts import redirect
+# Create your views here.
 
 
 class IndexView(ListView):

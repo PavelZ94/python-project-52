@@ -1,5 +1,7 @@
-from django.shortcuts import render
-from django.views.generic import CreateView, ListView, UpdateView, DeleteView, DetailView
+from django.views.generic import (CreateView,
+                                  UpdateView,
+                                  DeleteView,
+                                  DetailView)
 from django_filters.views import FilterView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin

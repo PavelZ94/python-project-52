@@ -157,8 +157,7 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 ROLLBAR = {
-    #'access_token': os.getenv('ROLLBAR_ACCESS_TOKEN'),
-    'access_token': '49daa76e254b4424b68aab3ad7838e4c',
+    'access_token': os.getenv('ROLLBAR_ACCESS_TOKEN'),
     'environment': 'development' if DEBUG else 'production',
     'code_version': '1.0',
     'root': BASE_DIR,

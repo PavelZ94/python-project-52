@@ -8,3 +8,4 @@ coverage/
 venv/
 .env
 db.sqlite3
+.flake8

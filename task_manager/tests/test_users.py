@@ -32,7 +32,6 @@ class CRUDTest(TestCase):
         self.assertEqual(new_user.first_name, first_name)
         self.assertEqual(new_user.last_name, last_name)
 
-
     def test_user_read(self):
         username = 'Slipknot'
         first_name = 'Joey'

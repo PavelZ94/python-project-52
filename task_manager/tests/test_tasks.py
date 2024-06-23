@@ -1,15 +1,16 @@
 from django.test import TestCase, Client
 from django.urls import reverse
 from django.contrib.auth import get_user_model
-
 from task_manager.tasks.models import Task
+
 
 class CRUDTest(TestCase):
     model = get_user_model()
 
     def setUp(self):
         self.client = Client()
-        self.user = self.model.objects.create_user(username='Test', password='password')
+        self.user = self.model.objects.create_user(username='Test',
+                                                   password='password')
 
     def test_create_task(self):
         name = 'To capture the world'
@@ -18,7 +19,7 @@ class CRUDTest(TestCase):
         self.client.force_login(self.user)
 
         status_created = self.client.post(reverse('status_create'),
-                                    data={'name': status})
+                                          data={'name': status})
 
         response = self.client.post(reverse('task_create'),
                                     data={'name': name,
@@ -52,7 +53,7 @@ class CRUDTest(TestCase):
         self.assertRedirects(response, reverse('login'), 302)
 
         status_created = self.client.post(reverse('status_create'),
-                                    data={'name': status})
+                                          data={'name': status})
 
         response = self.client.post(reverse('task_create'),
                                     data={'name': username,
@@ -72,7 +73,7 @@ class CRUDTest(TestCase):
         self.client.force_login(self.user)
 
         status_created = self.client.post(reverse('status_create'),
-                                    data={'name': status})
+                                          data={'name': status})
 
         response = self.client.post(reverse('task_create'),
                                     data={'name': name,
@@ -87,7 +88,7 @@ class CRUDTest(TestCase):
         self.client.force_login(self.user)
 
         status_created = self.client.post(reverse('status_create'),
-                                    data={'name': status})
+                                          data={'name': status})
 
         response = self.client.post(reverse('task_create'),
                                     data={'name': name,
@@ -99,9 +100,9 @@ class CRUDTest(TestCase):
 
         changed_task = 'To save the world'
 
-        response = self.client.post(reverse('task_update', kwargs={'pk': task.pk}),
-        data={'name': changed_task})
-
+        response = self.client.post(reverse('task_update',
+                                            kwargs={'pk': task.pk}),
+                                    data={'name': changed_task})
 
         self.assertRedirects(response, reverse('tasks'))
 
@@ -116,7 +117,7 @@ class CRUDTest(TestCase):
         self.client.force_login(self.user)
 
         status_created = self.client.post(reverse('status_create'),
-                                    data={'name': status})
+                                          data={'name': status})
 
         response = self.client.post(reverse('task_create'),
                                     data={'name': name,
@@ -125,7 +126,8 @@ class CRUDTest(TestCase):
         self.assertRedirects(response, reverse('tasks'), 302)
         task = Task.objects.get(name=name)
 
-        response = self.client.post(reverse('task_delete', kwargs={'pk': task.pk}))
+        response = self.client.post(reverse('task_delete',
+                                            kwargs={'pk': task.pk}))
 
         self.assertRedirects(response, reverse('tasks'))
 

@@ -38,11 +38,10 @@ class TaskFilter(FilterSet):
         else:
             return queryset
 
-
     class Meta:
         model = Task
-        fields=('status',
-                'executor',
-                'label',
-                'own_tasks',
-                )
+        fields = ('status',
+                  'executor',
+                  'label',
+                  'own_tasks',
+                  )
