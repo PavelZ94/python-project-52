@@ -5,6 +5,7 @@ from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from .models import Status
 from .forms import StatusForm
+from task_manager.mixin import DeleteProtectionMixin
 # Create your views here.
 
 
@@ -35,9 +36,11 @@ class UpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     login_url = reverse_lazy('login')
 
 
-class DeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
+class DeleteView(DeleteProtectionMixin, LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Status
     template_name = 'statuses/delete.html'
     success_url = reverse_lazy('statuses')
     success_message = _('Status was deleted successfully')
     login_url = reverse_lazy('login')
+    protected_message = _('It is not possible to delete this status because it is related to tasks')
+    protected_url = reverse_lazy('statuses')

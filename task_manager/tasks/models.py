@@ -31,8 +31,15 @@ class Task(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
 
-    label = models.ManyToManyField(Label,
-                                   blank=True)
+    labels = models.ManyToManyField(Label,
+                                   blank=True,
+                                   through='LabelAndTaskRelation',
+                                   related_name='label')
 
     def __str__(self):
         return self.name
+
+
+class LabelAndTaskRelation(models.Model):
+    task = models.ForeignKey(Task, on_delete=models.CASCADE)
+    label = models.ForeignKey(Label, on_delete=models.PROTECT)

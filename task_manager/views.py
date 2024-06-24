@@ -29,5 +29,9 @@ class Logout(LogoutView):
         return super().dispatch(request, *args, **kwargs)
 
 
-def page_not_found_view(request, exception):
-    return render(request, '404.html', status=404)
+def tk_handler_404(request, exception):
+    return render(request=request, template_name='404.html', status=404)
+
+
+def tk_handler_500(request):
+    return render(request=request, template_name='500.html', status=500)

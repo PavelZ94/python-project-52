@@ -12,7 +12,6 @@
     {% trans 'Show task' %}
 </h1>
 
-
   <div class="card-header bg-secondary text-white">
     <h2>{{ task.name }}</h2>
   </div>
@@ -40,9 +39,9 @@
         <div class="col">
           <h6>{% trans 'Labels' %}:</h6>
           <ul class="disc">
-              {% for label in task.label.all %}
+             {% for label in task.labels.all %}
             <li>{{ label.name }}</li>
-              {% endfor %}
+             {% endfor %}
           </ul>
         </div>
       </div>
@@ -55,5 +54,4 @@
       </div>
     </div>
   </div>
-
 {% endblock content %}

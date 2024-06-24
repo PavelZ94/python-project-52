@@ -5,6 +5,7 @@ from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from .models import Label
 from .forms import LabelForm
+from task_manager.mixin import DeleteProtectionMixin
 # Create your views here.
 
 
@@ -35,9 +36,11 @@ class UpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     login_url = reverse_lazy('login')
 
 
-class DeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
+class DeleteView(DeleteProtectionMixin, LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Label
     template_name = 'labels/delete.html'
     success_url = reverse_lazy('labels')
     success_message = _('Label was deleted successfully')
     login_url = reverse_lazy('login')
+    protected_message = _('It is not possible to delete this label because it is related to tasks')
+    protected_url = reverse_lazy('labels')
