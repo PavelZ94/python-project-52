@@ -4,18 +4,18 @@
 {% load i18n %}
 
 {% block title %}
-  {% trans "Task Manager" %}
+  {% trans 'Task Manager' %}
 {% endblock %}
 
 {% block content %}
 <div class="container wrapper flex-grow-1">
     <h1 class="my-4">
-        {% trans "Create status" %}
+        {% trans 'Create status' %}
     </h1>
     <form action="{% url 'status_create' %}" method="post">
         {% csrf_token %}
         {% bootstrap_form form %}
-        <input class="btn btn-primary" type="submit" value="{% trans 'Create' %}">
+        <input class="btn btn-primary" type="submit" value="{% trans 'Create status' %}">
     </form>
 </div>
 

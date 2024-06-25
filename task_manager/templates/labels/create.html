@@ -4,13 +4,13 @@
 {% load i18n %}
 
 {% block title %}
-  {% trans "Task Manager" %}
+  {% trans 'Task Manager' %}
 {% endblock %}
 
 {% block content %}
 <div class="container wrapper flex-grow-1">
     <h1 class="my-4">
-        {% trans "Create label" %}
+        {% trans 'Create label' %}
     </h1>
     <form action="{% url 'label_create' %}" method="post">
         {% csrf_token %}
