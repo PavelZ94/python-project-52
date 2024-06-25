@@ -388,7 +388,7 @@ msgstr "Невозможно удалить пользователя, потом
 
 #: task_manager/views.py:19
 msgid "You are logged in successfully"
-msgstr "Вы успешно залогинены"
+msgstr "Вы залогинены"
 
 #: task_manager/views.py:28
 msgid "You are logged out"
