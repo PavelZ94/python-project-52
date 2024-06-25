@@ -36,11 +36,15 @@ class UpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     login_url = reverse_lazy('login')
 
 
-class DeleteView(DeleteProtectionMixin, LoginRequiredMixin, SuccessMessageMixin, DeleteView):
+class DeleteView(DeleteProtectionMixin,
+                 LoginRequiredMixin,
+                 SuccessMessageMixin,
+                 DeleteView):
     model = Label
     template_name = 'labels/delete.html'
     success_url = reverse_lazy('labels')
     success_message = _('Label was deleted successfully')
     login_url = reverse_lazy('login')
-    protected_message = _('It is not possible to delete this label because it is related to tasks')
+    protected_message = _('''It is not possible to delete this label,
+     because it is related to tasks''')
     protected_url = reverse_lazy('labels')

@@ -32,9 +32,9 @@ class Task(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     labels = models.ManyToManyField(Label,
-                                   blank=True,
-                                   through='LabelAndTaskRelation',
-                                   related_name='label')
+                                    blank=True,
+                                    through='LabelAndTaskRelation',
+                                    related_name='label')
 
     def __str__(self):
         return self.name
