@@ -71,7 +71,7 @@ msgstr "Невозможно удалить статус, потому что о
 
 #: task_manager/tasks/filters.py:14 task_manager/tasks/forms.py:26
 msgid "Label"
-msgstr "Метки"
+msgstr "Метка"
 
 #: task_manager/tasks/filters.py:19 task_manager/tasks/forms.py:18
 #: task_manager/templates/tasks/index.html:32
