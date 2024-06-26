@@ -11,7 +11,8 @@ class Task(models.Model):
                             unique=True)
 
     description = models.TextField(null=True,
-                                   blank=True)
+                                   blank=True,
+                                   )
 
     author = models.ForeignKey(User,
                                null=True,
@@ -21,7 +22,8 @@ class Task(models.Model):
     status = models.ForeignKey(Status,
                                on_delete=models.PROTECT,
                                null=True,
-                               blank=True)
+                               blank=True,
+                               related_name='status')
 
     executor = models.ForeignKey(User,
                                  null=True,
