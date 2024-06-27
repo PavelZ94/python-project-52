@@ -12,8 +12,7 @@ class TaskForm(forms.ModelForm):
                            label=_('Name'))
 
     description = forms.CharField(label=_('Description'),
-                                  required=False,
-                                  initial='')
+                                  required=False,)
 
     status = forms.ModelChoiceField(required=False,
                                     label=_('Status'),
@@ -25,7 +24,7 @@ class TaskForm(forms.ModelForm):
 
     labels = forms.ModelMultipleChoiceField(queryset=Label.objects.all(),
                                             label=_('Labels'),
-                                            required=False)
+                                            required=False,)
 
     class Meta:
         model = Task

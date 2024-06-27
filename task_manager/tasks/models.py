@@ -11,8 +11,7 @@ class Task(models.Model):
                             unique=True)
 
     description = models.TextField(null=True,
-                                   blank=True,
-                                   )
+                                   blank=True,)
 
     author = models.ForeignKey(User,
                                null=True,
