@@ -12,7 +12,8 @@ class TaskForm(forms.ModelForm):
                            label=_('Name'))
 
     description = forms.CharField(label=_('Description'),
-                                  required=False)
+                                  required=False,
+                                  initial='')
 
     status = forms.ModelChoiceField(required=False,
                                     label=_('Status'),
