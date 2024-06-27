@@ -9,7 +9,7 @@ from task_manager.users.models import User
 
 class TaskFilter(FilterSet):
 
-    label = ModelChoiceFilter(
+    labels = ModelChoiceFilter(
         queryset=Label.objects.all(),
         label=_('Label'),
      )
@@ -42,6 +42,6 @@ class TaskFilter(FilterSet):
         model = Task
         fields = ('status',
                   'executor',
-                  'label',
+                  'labels',
                   'own_tasks',
                   )
