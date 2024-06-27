@@ -10,6 +10,7 @@ from task_manager.mixin import DeleteProtectionMixin
 
 
 class IndexView(ListView):
+    """Status list view"""
     model = Status
     template_name = 'statuses/index.html'
     context_object_name = 'statuses'
@@ -19,6 +20,7 @@ class IndexView(ListView):
 
 
 class CreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+    """Status create view"""
     model = Status
     form_class = StatusForm
     template_name = 'statuses/create.html'
@@ -28,6 +30,7 @@ class CreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 
 
 class UpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    """Status edit view"""
     model = Status
     form_class = StatusForm
     template_name = 'statuses/update.html'
@@ -40,6 +43,7 @@ class DeleteView(DeleteProtectionMixin,
                  LoginRequiredMixin,
                  SuccessMessageMixin,
                  DeleteView):
+    """Status delete view"""
     model = Status
     template_name = 'statuses/delete.html'
     success_url = reverse_lazy('statuses')

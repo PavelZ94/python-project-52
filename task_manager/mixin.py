@@ -5,6 +5,7 @@ from django.utils.translation import gettext_lazy as _
 
 
 class RulesMixin:
+    """The mixin checks for the necessary user rights"""
 
     def has_permission(self) -> bool:
         return self.get_object().pk == self.request.user.pk
@@ -27,6 +28,8 @@ class RulesMixin:
 
 
 class DeleteProtectionMixin:
+    """mixin protects the user,statuses and labels
+     from being deleted if they are associated with a task"""
     protected_message = None
     protected_url = None
 

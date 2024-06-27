@@ -9,6 +9,7 @@ from task_manager.mixin import RulesMixin, DeleteProtectionMixin
 
 
 class IndexView(ListView):
+    """Userlist view"""
     model = User
     template_name = 'users/index.html'
     context_object_name = 'users'
@@ -18,6 +19,7 @@ class IndexView(ListView):
 
 
 class SignUp(SuccessMessageMixin, CreateView):
+    """User register view"""
     model = User
     form_class = CreationForm
     template_name = 'users/create.html'
@@ -26,6 +28,7 @@ class SignUp(SuccessMessageMixin, CreateView):
 
 
 class Update(RulesMixin, SuccessMessageMixin, UpdateView):
+    """User edit view"""
     model = User
     form_class = CreationForm
     template_name = 'users/update.html'
@@ -37,6 +40,7 @@ class Delete(DeleteProtectionMixin,
              RulesMixin,
              SuccessMessageMixin,
              DeleteView):
+    """User delete view"""
     model = User
     template_name = 'users/delete.html'
     success_url = reverse_lazy('users')

@@ -8,6 +8,7 @@ from task_manager.users.models import User
 
 
 class TaskFilter(FilterSet):
+    """Filterset of tasks"""
 
     labels = ModelChoiceFilter(
         queryset=Label.objects.all(),

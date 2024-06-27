@@ -10,6 +10,7 @@ from task_manager.mixin import DeleteProtectionMixin
 
 
 class IndexView(ListView):
+    """Label list view"""
     model = Label
     template_name = 'labels/index.html'
     context_object_name = 'labels'
@@ -19,6 +20,7 @@ class IndexView(ListView):
 
 
 class CreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+    """Label create view"""
     model = Label
     form_class = LabelForm
     template_name = 'labels/create.html'
@@ -28,6 +30,7 @@ class CreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 
 
 class UpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    """Label edit view"""
     model = Label
     form_class = LabelForm
     template_name = 'labels/update.html'
@@ -40,6 +43,7 @@ class DeleteView(DeleteProtectionMixin,
                  LoginRequiredMixin,
                  SuccessMessageMixin,
                  DeleteView):
+    """Label delete view"""
     model = Label
     template_name = 'labels/delete.html'
     success_url = reverse_lazy('labels')

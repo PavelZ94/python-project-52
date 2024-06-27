@@ -3,6 +3,7 @@ from django.db import models
 
 
 class Status(models.Model):
+    """Status model"""
 
     name = models.CharField(max_length=20, unique=True)
 

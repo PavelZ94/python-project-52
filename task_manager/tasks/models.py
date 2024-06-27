@@ -6,6 +6,7 @@ from task_manager.labels.models import Label
 
 
 class Task(models.Model):
+    """Task model"""
 
     name = models.CharField(max_length=100,
                             unique=True)
@@ -42,5 +43,6 @@ class Task(models.Model):
 
 
 class LabelAndTaskRelation(models.Model):
+    """Model of relations between tasks and labels"""
     task = models.ForeignKey(Task, on_delete=models.CASCADE)
     label = models.ForeignKey(Label, on_delete=models.PROTECT)

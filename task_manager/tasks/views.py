@@ -14,6 +14,7 @@ from .filters import TaskFilter
 
 
 class IndexView(LoginRequiredMixin, FilterView):
+    """Tasklist view"""
     model = Task
     template_name = 'tasks/index.html'
     filterset_class = TaskFilter
@@ -24,6 +25,7 @@ class IndexView(LoginRequiredMixin, FilterView):
 
 
 class CreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+    """Task create view"""
     model = Task
     form_class = TaskForm
     template_name = 'tasks/create.html'
@@ -37,11 +39,13 @@ class CreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 
 
 class ShowView(DetailView):
+    """View of  determined task"""
     model = Task
     template_name = 'tasks/show.html'
 
 
 class UpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    """Task edit view"""
     model = Task
     form_class = TaskForm
     template_name = 'tasks/update.html'
@@ -51,6 +55,7 @@ class UpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 
 
 class DeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
+    """Task delete view"""
     model = Task
     template_name = 'tasks/delete.html'
     success_url = reverse_lazy('tasks')
