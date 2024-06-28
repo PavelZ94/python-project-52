@@ -9,34 +9,34 @@ class Task(models.Model):
     """Task model"""
 
     name = models.CharField(max_length=100,
-                            unique=True)
+                            unique=True,)
 
-    description = models.TextField(null=True,
-                                   blank=True,)
+    #description = models.TextField(blank=True,
+    #                               null=True,)
 
     author = models.ForeignKey(User,
                                null=True,
                                related_name='author',
-                               on_delete=models.PROTECT)
+                               on_delete=models.PROTECT,)
 
     status = models.ForeignKey(Status,
                                on_delete=models.PROTECT,
                                null=True,
                                blank=True,
-                               related_name='status')
+                               related_name='status',)
 
     executor = models.ForeignKey(User,
                                  null=True,
                                  blank=True,
                                  related_name='executor',
-                                 on_delete=models.PROTECT)
+                                 on_delete=models.PROTECT,)
 
     created_at = models.DateTimeField(auto_now_add=True)
 
     labels = models.ManyToManyField(Label,
                                     blank=True,
                                     through='LabelAndTaskRelation',
-                                    related_name='label')
+                                    related_name='label',)
 
     def __str__(self):
         return self.name
