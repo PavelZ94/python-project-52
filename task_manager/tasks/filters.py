@@ -13,7 +13,7 @@ class TaskFilter(FilterSet):
     labels = ModelChoiceFilter(
         queryset=Label.objects.all(),
         label=_('Label'),
-     )
+    )
 
     status = ModelChoiceFilter(
         queryset=Status.objects.all(),
