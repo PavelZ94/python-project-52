@@ -8,23 +8,23 @@ from task_manager.labels.models import Label
 
 class TaskForm(forms.ModelForm):
 
-    name = forms.CharField(required=True,
-                           label=_('Name'))
+    #name = forms.CharField(required=True,
+    #                       label=_('Name'))
 
-    description = forms.CharField(label=_('Description'),
-                                  required=False,)
+    #description = forms.CharField(label=_('Description'),
+    #                              required=False,)
 
-    status = forms.ModelChoiceField(required=False,
-                                    label=_('Status'),
-                                    queryset=Status.objects.all(),)
+    #status = forms.ModelChoiceField(required=False,
+    #                                label=_('Status'),
+    #                                queryset=Status.objects.all(),)
 
-    executor = forms.ModelChoiceField(label=_('Executor'),
-                                      queryset=User.objects.all(),
-                                      required=False,)
+    #executor = forms.ModelChoiceField(label=_('Executor'),
+    #                                  queryset=User.objects.all(),
+    #                                  required=False,)
 
-    labels = forms.ModelMultipleChoiceField(queryset=Label.objects.all(),
-                                            label=_('Labels'),
-                                            required=False,)
+    #labels = forms.ModelMultipleChoiceField(queryset=Label.objects.all(),
+    #                                        label=_('Labels'),
+    #                                        required=False,)
 
     class Meta:
         model = Task
