@@ -10,6 +10,7 @@ from django.utils.translation import gettext_lazy as _
 from .models import Task
 from .forms import TaskForm
 from .filters import TaskFilter
+from task_manager.mixin import TaskDeleteProtection
 # Create your views here.
 
 
@@ -54,10 +55,15 @@ class UpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     login_url = reverse_lazy('login')
 
 
-class DeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
+class DeleteView(LoginRequiredMixin,
+                 TaskDeleteProtection,
+                 SuccessMessageMixin,
+                 DeleteView):
     """Task delete view"""
     model = Task
     template_name = 'tasks/delete.html'
     success_url = reverse_lazy('tasks')
     success_message = _('Task was deleted successfully')
+    author_message = _('The task can be deleted only by its author')
+    author_url = reverse_lazy('tasks')
     login_url = reverse_lazy('login')

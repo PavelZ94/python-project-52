@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.db.models import ProtectedError
+from django.contrib.auth.mixins import UserPassesTestMixin
 from django.utils.translation import gettext_lazy as _
 
 
@@ -39,3 +40,19 @@ class DeleteProtectionMixin:
         except ProtectedError:
             messages.error(request, self.protected_message)
             return redirect(self.protected_url)
+
+
+class TaskDeleteProtection(UserPassesTestMixin):
+    """
+    Authorisation check.
+    Prohibits deleting an item not by its author.
+    """
+    author_message = None
+    author_url = None
+
+    def test_func(self):
+        return self.get_object().author == self.request.user
+
+    def handle_no_permission(self):
+        messages.error(self.request, self.author_message)
+        return redirect(self.author_url)
