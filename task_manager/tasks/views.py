@@ -10,7 +10,7 @@ from django.utils.translation import gettext_lazy as _
 from .models import Task
 from .forms import TaskForm
 from .filters import TaskFilter
-from task_manager.mixin import TaskDeleteProtection
+from task_manager.mixins import TaskDeleteProtection
 # Create your views here.
 
 

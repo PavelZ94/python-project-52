@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from .models import Label
 from .forms import LabelForm
-from task_manager.mixin import DeleteProtectionMixin
+from task_manager.mixins import DeleteProtectionMixin
 # Create your views here.
 
 

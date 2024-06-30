@@ -4,7 +4,7 @@ from django.utils.translation import gettext_lazy as _
 from django.urls import reverse_lazy
 from .models import User
 from .forms import CreationForm
-from task_manager.mixin import RulesMixin, DeleteProtectionMixin
+from task_manager.mixins import RulesMixin, DeleteProtectionMixin
 # Create your views here.
 
 
